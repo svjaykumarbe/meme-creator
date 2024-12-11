@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Typography, Divider, Button } from '@mui/material';
+import { Box, Typography, Divider } from '@mui/material';
 import MemeEditor from '../components/MemeEditor';
 import MemeCaptionGenerator from '../components/MemeCaptionGenerator';
 import SocialShare from '../components/SocialShare';
 
-const MemeCreator = () => {
+const MemeCreatorPage = () => {
   // State to manage meme image and caption
   const [memeImageUrl, setMemeImageUrl] = useState('');
   const [memeCaption, setMemeCaption] = useState('');
@@ -19,21 +19,8 @@ const MemeCreator = () => {
     setMemeCaption(caption);
   };
 
-  // Clear Meme
-  const handleClearMeme = () => {
-    setMemeImageUrl('');
-    setMemeCaption('');
-  };
-
   return (
-    <Box
-      sx={{
-        p: { xs: 2, sm: 4 },
-        maxWidth: 900,
-        mx: 'auto',
-        textAlign: 'center',
-      }}
-    >
+    <Box sx={{ p: 4, maxWidth: 900, mx: 'auto' }}>
       <Typography variant="h4" gutterBottom align="center">
         Meme Creator
       </Typography>
@@ -48,25 +35,11 @@ const MemeCreator = () => {
       <Divider sx={{ my: 4 }} />
 
       {/* Social Share */}
-      {!memeImageUrl || !memeCaption ? (
-        <Typography variant="body1" align="center" sx={{ mt: 4 }}>
-          Complete your meme to enable sharing options.
-        </Typography>
-      ) : (
+      {memeImageUrl && memeCaption && (
         <SocialShare imageUrl={memeImageUrl} caption={memeCaption} />
       )}
-
-      {/* Clear Meme Button */}
-      <Button
-        variant="outlined"
-        color="secondary"
-        onClick={handleClearMeme}
-        sx={{ mt: 2 }}
-      >
-        Clear Meme
-      </Button>
     </Box>
   );
 };
 
-export default MemeCreator;
+export default MemeCreatorPage;
